@@ -1,0 +1,64 @@
+*{
+      padding:0;
+      margin: 0;
+    }
+
+.wrap{
+  width:80%;
+  margin:0 auto;
+  padding:.5em 0;
+}
+
+
+.wrap li{
+  list-style: none;
+  display: inline;
+}
+
+.wrap li a:hover{
+  text-decoration: none;
+  /*border-left: 5px solid darkred;*/
+}
+
+.wrap li a p{
+  padding-left: 5px;
+  display: inline-block;
+  font-size: 1.3em;
+}
+
+.wrap p{
+    font-family: 'Open Sans', sans-serif;
+  color: #007DAD;
+  font-size: 1em;
+  padding-left: 18px;
+  font-weight: bolder;
+  margin: 0;
+}
+/* written by riliwan balogun http://www.facebook.com/riliwan.rabo*/
+
+
+.container-margin{
+  border-top:2px solid #9E0007;
+  width:100%;
+  margin-top: 0px;
+}
+
+.container-margin-top{
+  border-top:.5px solid black;
+  width:100%;
+  margin-top: 0px;
+  background-color: #F2F2F2
+}
+
+.container-full{
+  width:100%;
+  margin-top: 0px;
+  height: 547px;
+}
+
+.white-color{
+  color: #fff !important;
+}
+.container {
+  min-height: 400px
+}
