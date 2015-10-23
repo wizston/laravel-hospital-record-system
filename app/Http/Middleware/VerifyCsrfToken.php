@@ -10,7 +10,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 class VerifyCsrfToken extends BaseVerifier {
 
 	protected $except = [
-		'doctor/report/ajax/get_doctors',
+		'*',
+//		'doctor/report/ajax/get_doctors',
 	];
 
 	/**
