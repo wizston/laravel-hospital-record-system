@@ -1,60 +1,91 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-	<div class="row">
+    <style>
+        .alert-default {
+            background: #eee;
+        }
 
-		<div class="col-md-10 col-md-offset-1">
+        .alert-default h5 {
+            margin-top: 0.5px;
+            margin-bottom: -2.5px;
+        }
 
-			<div class="panel panel-default">
-				<div class="panel-heading">{{ trans('navs.dashboard') }}</div>
+        .alert-default p {
+            color: #2c2c2c;
+        }
+        .alert {
+            margin-bottom: 3px;
+        }
 
-				<div class="panel-body">
-					<div role="tabpanel">
+    </style>
+    <div class="col-md-8">
 
-                      <!-- Nav tabs -->
-                      <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('navs.my_information') }}</a></li>
-                      </ul>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-weight: bold">My Recent Reports and Recommendations</div>
+                <div class="panel-body">
 
-                      <div class="tab-content">
+                    @if(count($recent_report))
+                    <div class="row">
+                        <div class="well well-lg" style="padding: 5px 30px; margin: 5px 10px;" role="alert">
+                            <div class="row">
+                                <p><strong class="text-danger">Report: </strong><br>
+                                    {{ $recent_report->report }}
+                                    {{--...<a href="#">read more</a>--}}
+                                </p>
+                            </div>
+                            <div class="row">
+                                <h5 class="text-success">Doctor's Recommendations: </h5>
+                            </div>
 
-                        <div role="tabpanel" class="tab-pane active" id="profile">
-                            <table class="table table-striped table-hover table-bordered dashboard-table">
-                                <tr>
-                                    <th>{{ trans('validation.attributes.name') }}</th>
-                                    <td>{!! $user->name !!}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ trans('validation.attributes.email') }}</th>
-                                    <td>{!! $user->email !!}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ trans('validation.attributes.created_at') }}</th>
-                                    <td>{!! $user->created_at !!} ({!! $user->created_at->diffForHumans() !!})</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ trans('validation.attributes.last_updated') }}</th>
-                                    <td>{!! $user->updated_at !!} ({!! $user->updated_at->diffForHumans() !!})</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ trans('validation.attributes.actions') }}</th>
-                                    <td>
-                                        <a href="{!!route('frontend.profile.edit')!!}" class="btn btn-primary btn-xs">{{ trans('labels.edit_information') }}</a>
-                                        <a href="{!!url('auth/password/change')!!}" class="btn btn-warning btn-xs">{{ trans('navs.change_password') }}</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div><!--tab panel profile-->
+                            @if($recommendation)
+                            <div class="row">
+                                <p>
+                                    <span>Doctor: <strong>{{ $recommendation->name }}</strong></span>
 
-                      </div><!--tab content-->
+                                   <span style="float:right">Date: <strong> {{ $recommendation->updated_at->diffForHumans() }}</strong></span>
+                                </p>
+                                <p>
+                                    {{ $recommendation->advice }}
+                                </p>
+                            </div>
+                            <div class="row">
+                                <a class="btn btn-danger pull-right" href="{{ url('report/'. $recommendation->id) }}">View</a>
+                            </div>
+                            @else
+                                <div class="text-center">
+                                    <strong class="text-danger">This report has no recommendation yet, please be patient since you already a patient.</strong>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    @else
+                        <div class="text-center">
+                            <strong>You haven't made any report yet.</strong><br/>
+                            if you will like to make a report, click <a href="{{ url('report/new') }}">here.</a>
+                        </div>
+                    @endif
 
-                    </div><!--tab panel-->
+                </div>
+            </div>
+        </div>
+    </div>
 
-				</div><!--panel body-->
 
-			</div><!-- panel -->
+    <div class="col-md-4" >
 
-		</div><!-- col-md-10 -->
+        @include('frontend.includes.notifications')
 
-	</div><!-- row -->
+        @include('frontend.includes.profile-nav')
+
+            </div>
+
 @endsection
+
+@section('after-scripts-end')
+    <script>
+        //Being injected from FrontendController
+        console.log(test);
+    </script>
+@stop

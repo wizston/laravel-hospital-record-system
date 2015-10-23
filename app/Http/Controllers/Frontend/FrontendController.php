@@ -1,8 +1,11 @@
 <?php namespace App\Http\Controllers\Frontend;
 
+use App\DoctorsSpecialization;
 use App\Http\Controllers\Controller;
+use App\Models\Access\User\User;
 use App\Notification;
 use App\Reports;
+use Illuminate\Http\Request;
 
 /**
  * Class FrontendController
@@ -23,78 +26,33 @@ class FrontendController extends Controller {
 	 */
 	public function index()
 	{
-
-//		return view('frontend.index');
-
+		#return view('frontend.index');
 		return redirect('dashboard');
 	}
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function dashboard()
-	{
 
-		//Fetch all notifications for this user alone
-		$notifications = Notification::where('user_id', auth()->user()->id)->paginate(3);
-
-		$data =
-			[
-				'notifications'   => $notifications
-			];
-
-		return view('frontend.dashboard', $data);
-	}
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function notification()
-	{
-        //Fetch all notifications for this user alone
-        $notifications = Notification::where('user_id', auth()->user()->id)->paginate(10);
-
-        $data =
-            [
-                'notifications'   => $notifications
-            ];
-
-		return view('frontend.notification', $data);
-	}
-
-    public function reports()
+    /**
+     * AJAX call to fetch all doctors relation a a specialization
+     */
+    public function getDoctors(Request $request)
     {
-        $reports = Reports::where('user_id', auth()->user()->id)->get();
+        $spec_id = $request->id;
 
-        $data =
-            [
-                'reports'  => $reports
-            ];
+        $specs = User::where('specialization_id', $spec_id)->where('id', '!=', auth()->user()->id)->get();
 
-        return view('frontend.reports', $data);
-    }
+        $response = "";
 
-    public function reportPage($id)
-    {
-        $report = Reports::find($id);
-        if(!$report) {
-            $data =
-                [
-                    'report' => $report
-                ];
-
-            return view('frontend.report_page', $data);
+        if(count($specs))
+        {
+            foreach ($specs as $spec) {
+                $response .= "<option value='" . $spec['id'] . "'>" . $spec['name'] . "</option>";
+            }
+            return $response;
         }
         else
-            abort(404);
+            return json_encode('error: No Doctor matches your request',500);
+
+
     }
-
-
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function profile()
-	{
-		return view('frontend.profile');
-	}
 
 	/**
 	 * @return \Illuminate\View\View

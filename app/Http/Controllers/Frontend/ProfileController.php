@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Access\User\User;
 use App\Repositories\Frontend\User\UserContract;
 use App\Http\Requests\Frontend\User\UpdateProfileRequest;
 
@@ -14,8 +15,10 @@ class ProfileController extends Controller {
 	 * @return mixed
      */
 	public function edit() {
+
+		$user = User::where('users.id', auth()->user()->id)->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')->first();
 		return view('frontend.user.profile.edit')
-			->withUser(auth()->user());
+			->withUser($user);
 	}
 
 	/**

@@ -54,6 +54,8 @@ class AuthController extends Controller
         if($user = $this->auth->create($regData))
         {
 
+            auth()->login($user);
+
             $userData =
                 [
                 'address'                   => $request->address,
@@ -65,10 +67,9 @@ class AuthController extends Controller
                 'next_of_kin_gender'        => $request->kin_gender,
                 'next_of_kin_phone'         => $request->kin_number,
                 'next_of_kin_name'          => $request->kin_name,
-                'user_id'                   => $user->id
+                'user_id'                   => auth()->user()->id
             ];
 
-            auth()->login($user);
 
             $userProfile = new UserProfile();
 

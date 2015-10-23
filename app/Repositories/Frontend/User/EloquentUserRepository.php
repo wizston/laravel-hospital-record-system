@@ -3,6 +3,7 @@
 use App\Models\Access\User\User;
 use App\Models\Access\User\UserProvider;
 use App\Exceptions\GeneralException;
+use App\UserProfile;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use App\Repositories\Backend\Role\RoleRepositoryContract;
@@ -153,6 +154,19 @@ class EloquentUserRepository implements UserContract {
 				$user->email = $input['email'];
 			}
 		}
+
+		$profile = UserProfile::where('user_id', $user->id)->first();
+		$profile->address                  = $input['address'];
+        $profile->phone                    = $input['phone'];
+        $profile->date_of_birth            = $input['date_of_birth'];
+        $profile->gender                   = $input['gender'];
+        $profile->next_of_kin_name         = $input['next_of_kin_name'];
+        $profile->next_of_kin_phone        = $input['next_of_kin_phone'];
+        $profile->next_of_kin_address       = $input['next_of_kin_address'];
+        $profile->next_of_kin_gender       = $input['next_of_kin_gender'];
+        $profile->next_of_kin_relationship = $input['next_of_kin_relationship'];
+
+        $profile->save();
 
 		return $user->save();
 	}

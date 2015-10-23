@@ -78,7 +78,7 @@ return array(
 		/*
 		 * Whether or not the users email can be changed on the edit profile screen
 		 */
-		'change_email' => false,
+		'change_email' => true,
 	],
 
 	/*

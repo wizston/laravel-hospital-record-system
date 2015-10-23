@@ -85,55 +85,30 @@
             <div class="well profile">
                 <div class="col-sm-12">
                     <div class="col-xs-12 col-sm-8">
-                        <h2>Nicole Pearson</h2>
-                        <p><strong>About: </strong> Web Designer / UI. </p>
-                        <p><strong>Hobbies: </strong> Read, out with friends, listen to music, draw and learn new things. </p>
-                        <p><strong>Skills: </strong>
-                            <span class="tags">html5</span>
-                            <span class="tags">css3</span>
-                            <span class="tags">jquery</span>
-                            <span class="tags">bootstrap3</span>
-                        </p>
+                        <h3>{{ $user->name }}</h3>
+                        <p><strong>Email: </strong> {{ $user->email }} </p>
+                        <p><strong>Address: </strong> {{ $user->address }} </p>
                     </div>
                     <div class="col-xs-12 col-sm-4 text-center">
-                        <figure>
-                            <img src="http://www.brunningonline.net/simon/blog/archives/South%20Park%20Avatar.jpg" alt="" class="img-circle img-responsive">
-                            <figcaption class="ratings">
-                                <p>Ratings
-                                    <a href="#">
-                                        <span class="fa fa-star"></span>
-                                    </a>
-                                    <a href="#">
-                                        <span class="fa fa-star"></span>
-                                    </a>
-                                    <a href="#">
-                                        <span class="fa fa-star"></span>
-                                    </a>
-                                    <a href="#">
-                                        <span class="fa fa-star"></span>
-                                    </a>
-                                    <a href="#">
-                                        <span class="fa fa-star-o"></span>
-                                    </a>
-                                </p>
-                            </figcaption>
-                        </figure>
+                        {{--<figure>
+                        --}}{{--    <img src="http://www.brunningonline.net/simon/blog/archives/South%20Park%20Avatar.jpg" alt="" class="img-circle img-responsive">
+                        </figure>--}}
                     </div>
                 </div>
                 <div class="col-xs-12 divider text-center">
                     <div class="col-xs-12 col-sm-4 emphasis">
-                        <h2><strong> 20,7K </strong></h2>
-                        <p><small>Followers</small></p>
-                        <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> dashboard </button>
+                        <h2><strong> {{ $reportCount }}</strong></h2>
+                        <p><small>Reports</small></p>
+                        <a href="{{ url('dashboard') }}" class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Dashboard </a>
                     </div>
                     <div class="col-xs-12 col-sm-4 emphasis">
-                        <h2><strong>245</strong></h2>
-                        <p><small>Following</small></p>
-                        <button class="btn btn-info btn-block"><span class="fa fa-user"></span> Edit </button>
+                        <h2><strong> --- </strong></h2>
+                        <p><small>Recommendations</small></p>
+                        <a href="{{ url('profile/edit') }}" class="btn btn-info btn-block"><span class="fa fa-user"></span> Edit </a>
                     </div>
                     <div class="col-xs-12 col-sm-4 emphasis">
-                        <h2><strong>43</strong></h2>
-                        <p><small>Snippets</small></p>
+                        <h2><strong>Active</strong></h2>
+                        <p><small>Status</small></p>
                         <div class="btn-group dropup btn-block">
                             <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Options </button>
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -141,11 +116,11 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu text-left" role="menu">
-                                <li><a href="#"><span class="fa fa-list pull-right"></span>Change password </a></li>
+                                <li><a href="{{ url('auth/password/change') }}"><span class="fa fa-list pull-right"></span>Change password </a></li>
                                 <li class="divider"></li>
-                                <li><a href="#"><span class="fa fa-warning pull-right"></span>View Reports</a></li>
+                                <li><a href="{{ url('reports') }}"><span class="fa fa-warning pull-right"></span>View Reports</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#" class="btn disabled" role="button"> Sign Out </a></li>
+                                <li><a href="{{ url('auth/logout') }}" class="btn" role="button"> Sign Out </a></li>
                             </ul>
                         </div>
                     </div>

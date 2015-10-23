@@ -15,7 +15,8 @@ class UserProfile extends Model
         'next_of_kin_phone',
         'next_of_kin_gender',
         'next_of_kin_relationship',
-        'next_of_kin_address'
+        'next_of_kin_address',
+        'user_id'
     ];
     //
 }

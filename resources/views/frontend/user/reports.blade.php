@@ -23,10 +23,18 @@
         {
             text-decoration: none !important;
         }
+        .make-report-link {
+            position: absolute;
+            top: 32px;
+            right: 18px;
+        }
     </style>
     <div class="col-md-8 col-md-offset-2">
         <div class="col-md-12">
-            <h3><i class="glyphicon glyphicon-file" style="color: #A8A8AB;"></i>Reports</h3>
+            <h3><i class="glyphicon glyphicon-file" style="color: #A8A8AB;"></i>Reports
+            </h3>
+            <a href="{{ url('report/new') }}" class="btn btn-success btn-sm make-report-link">Make Report</a>
+
 
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -37,7 +45,7 @@
                             <a href="{{ url('report/' . $report->id) }}" class="reports-list-link">
                                 <div class="panel panel-default">
                                     <div class="panel-body" style="position: relative;">
-                                        <div><strong>Doctor:</strong> {{ $report->doctor_name }}</div>
+                                        <div><strong>Report: </strong>{{ mb_strimwidth($report->report, 0, 90, "...") }}</div>
                                         <div><strong>Date:</strong> {{ $report->updated_at->format('d - M - Y') }}</div>
                                         <i class="glyphicon glyphicon-chevron-right reports-arrow"></i>
                                     </div>
