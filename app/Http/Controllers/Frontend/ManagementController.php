@@ -94,8 +94,8 @@ class ManagementController extends Controller
 
         $person->name = $request->name;
         $person->email = $request->email;
-        $person->license_number = isset($request->license_number) ? $request->license_number : null;
-        $person->specialization_id = isset($request->specialization_id) ? $request->specialization_id : null;
+        $person->license_number = $request->license_number ? $request->license_number : null;
+        $person->specialization_id = $request->specialization_id ? $request->specialization_id : null;
         $person->save();
 
         return redirect('management/dashboard')->withFlashSuccess('Entry Saved!');

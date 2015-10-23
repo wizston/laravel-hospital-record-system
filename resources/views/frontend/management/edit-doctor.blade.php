@@ -18,7 +18,7 @@
             <div class="panel-body">
 
                 <h4>Edit Profile</h4>
-                {!! Form::model($user, ['url' => 'management/profile/update', 'class' => 'form-horizontal']) !!}
+                {!! Form::model($user, ['url' => url('management/profile/update'), 'class' => 'form-horizontal', 'method' => 'PATCH']) !!}
 
                 <input type="hidden" name="userID" value="{{ $user->id }}">
                 <div class="form-group">

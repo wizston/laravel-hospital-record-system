@@ -25,7 +25,7 @@ class UpdateUsersRequest extends Request
     {
         return [
             'name' 		        => 'required|max:255',
-            'email' 	        => 'required|email|max:255|unique:users',
+            'email' 	        => 'required|email|max:255',
             'userID'            => 'required|integer',
             'specialization_id' => 'sometimes|required|integer',
             'license_number'    => 'sometimes|required'
