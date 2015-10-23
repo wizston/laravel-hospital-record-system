@@ -25,6 +25,11 @@ class DoctorController extends Controller
 {
     public function dashboard()
     {
+        if(access()->can('manage_hospital'))
+        {
+            return redirect('management/dashboard');
+        }
+
         $doctor = auth()->user();
 
         //Get last 10 reports assigned to this doctor
